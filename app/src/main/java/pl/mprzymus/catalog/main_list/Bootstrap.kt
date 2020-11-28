@@ -9,8 +9,5 @@ class Bootstrap {
         data.add(Record("Pepe", listOf("Classic"), R.drawable.pepefroggie))
         data.add(Record("Nosacz", listOf("Polish", "Testo"), R.drawable.nosacz))
         data.add(Record("Arch linux", listOf("Linux", "Arch"), R.drawable.arch))
-
-        //data.add(Record())
-        //data.add(Record())
     }
 }
