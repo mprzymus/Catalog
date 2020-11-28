@@ -14,6 +14,7 @@ class ListFragment : Fragment() {
     private lateinit var viewAdapter: RecordAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewManager: RecyclerView.LayoutManager
+    private val bootstrap = Bootstrap()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,10 +22,7 @@ class ListFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_list, container, false)
         viewManager = LinearLayoutManager(context)
-        val data = ArrayList<Record>()
-        data.add(Record())
-        data.add(Record())
-        data.add(Record())
+        val data = bootstrap.data
         viewAdapter = RecordAdapter(data)
         val act = activity
         if (act != null) {

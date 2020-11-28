@@ -8,26 +8,43 @@
     android:paddingBottom="20dp">
 
     <TextView
-        android:id="@+id/itemDate"
-        android:layout_width="235dp"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="@dimen/margin"
+        android:id="@+id/itemName"
+        android:layout_width="245dp"
+        android:layout_height="51dp"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/history_number"
+        app:layout_constraintStart_toEndOf="@+id/recordImage"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Some date" />
+        tools:text="Item name" />
+
+    <ImageView
+        android:id="@+id/recordImage"
+        android:layout_width="131dp"
+        android:layout_height="109dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/history_number"
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/margin"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/category"
+        android:layout_width="133dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="4dp"
+        android:text="Category"
+        app:layout_constraintStart_toStartOf="@+id/recordImage"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="Like"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

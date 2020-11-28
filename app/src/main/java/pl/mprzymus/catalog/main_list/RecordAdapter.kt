@@ -3,15 +3,17 @@ package pl.mprzymus.catalog.main_list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import pl.mprzymus.catalog.R
 
-class RecordAdapter(private val dataSet: ArrayList<Record>) :
+class RecordAdapter(private val dataSet: List<Record>) :
     RecyclerView.Adapter<RecordAdapter.RecordViewHolder>() {
     class RecordViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
-        val number: TextView = itemView.findViewById(R.id.history_number)
-        val textView: TextView = itemView.findViewById(R.id.itemDate)
+        val tittle: TextView = itemView.findViewById(R.id.itemName)
+        val image: ImageView = itemView.findViewById(R.id.recordImage)
+        val category: TextView = itemView.findViewById(R.id.category)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
@@ -23,8 +25,9 @@ class RecordAdapter(private val dataSet: ArrayList<Record>) :
     }
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
-        holder.number.text = position.toString()
-        holder.textView.text = position.toString()
+        holder.tittle.text = dataSet[position].name
+        holder.image.setImageResource(dataSet[position].imageId)
+        holder.category.text = dataSet[position].getCategories()
     }
 
     override fun getItemCount() = dataSet.size
