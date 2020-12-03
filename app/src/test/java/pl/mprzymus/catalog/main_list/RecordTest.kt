@@ -2,6 +2,7 @@ package pl.mprzymus.catalog.main_list
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import pl.mprzymus.catalog.model.Record
 
 class RecordTest : FunSpec({
     val record = Record("tested", listOf("category1", "category2"), 1)

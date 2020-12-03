@@ -3,10 +3,16 @@ package pl.mprzymus.catalog.main_list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import pl.mprzymus.catalog.CatalogViewModel
 import pl.mprzymus.catalog.R
+import pl.mprzymus.catalog.model.Record
 
 class RecordAdapter(private val dataSet: List<Record>) :
     RecyclerView.Adapter<RecordAdapter.RecordViewHolder>() {
@@ -14,7 +20,10 @@ class RecordAdapter(private val dataSet: List<Record>) :
         val tittle: TextView = itemView.findViewById(R.id.itemName)
         val image: ImageView = itemView.findViewById(R.id.recordImage)
         val category: TextView = itemView.findViewById(R.id.category)
+        val button: ImageButton = itemView.findViewById(R.id.button)
     }
+
+    private val clickListener: RecordClickListener = RecordClickListener()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             RecordViewHolder {
@@ -28,7 +37,11 @@ class RecordAdapter(private val dataSet: List<Record>) :
         holder.tittle.text = dataSet[position].name
         holder.image.setImageResource(dataSet[position].imageId)
         holder.category.text = dataSet[position].getCategories()
+        holder.button.setImageResource(LikeButtonProvider.getImage(dataSet[position].isFavourite))
+        holder.button.setOnClickListener { clickListener.onLikeClick(dataSet[position], holder.button) }
     }
 
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount(): Int {
+        return dataSet.size
+    }
 }

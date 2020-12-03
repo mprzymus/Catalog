@@ -24,7 +24,8 @@
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/graphic_description" />
 
     <TextView
         android:id="@+id/category"
@@ -32,19 +33,20 @@
         android:layout_height="55dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="4dp"
-        android:text="Category"
         app:layout_constraintStart_toStartOf="@+id/recordImage"
         app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
-    <Button
+    <ImageButton
         android:id="@+id/button"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:text="Like"
+        android:src="@drawable/like_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/itemName"
+        android:contentDescription="@string/button_description" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
