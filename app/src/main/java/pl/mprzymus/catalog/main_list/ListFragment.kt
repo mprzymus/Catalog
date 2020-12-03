@@ -1,15 +1,12 @@
 package pl.mprzymus.catalog.main_list
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.mprzymus.catalog.CatalogViewModel
@@ -37,6 +34,8 @@ class ListFragment : Fragment() {
                 adapter = viewAdapter
             }
         }
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(viewAdapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
         return rootView
     }
 }

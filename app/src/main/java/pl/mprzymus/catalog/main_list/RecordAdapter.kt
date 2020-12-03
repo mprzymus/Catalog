@@ -14,7 +14,7 @@ import pl.mprzymus.catalog.CatalogViewModel
 import pl.mprzymus.catalog.R
 import pl.mprzymus.catalog.model.Record
 
-class RecordAdapter(private val dataSet: List<Record>) :
+class RecordAdapter(private val dataSet: MutableList<Record>) :
     RecyclerView.Adapter<RecordAdapter.RecordViewHolder>() {
     class RecordViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val tittle: TextView = itemView.findViewById(R.id.itemName)
@@ -43,5 +43,10 @@ class RecordAdapter(private val dataSet: List<Record>) :
 
     override fun getItemCount(): Int {
         return dataSet.size
+    }
+
+    fun deleteItem(position: Int) {
+        dataSet.removeAt(position)
+        notifyItemRemoved(position)
     }
 }
