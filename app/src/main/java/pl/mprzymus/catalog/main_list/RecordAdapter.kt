@@ -20,6 +20,7 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
 
     private val clickListener: RecordClickListener = RecordClickListener()
     private var showedList: List<Record>
+    private var showOnlyFavourites = true
 
     init {
         showedList = dataSet
@@ -38,7 +39,12 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
         holder.image.setImageResource(showedList[position].imageId)
         holder.category.text = showedList[position].getCategories()
         holder.button.setImageResource(LikeButtonProvider.getImage(showedList[position].isFavourite))
-        holder.button.setOnClickListener { clickListener.onLikeClick(showedList[position], holder.button) }
+        holder.button.setOnClickListener {
+            clickListener.onLikeClick(
+                showedList[position],
+                holder.button
+            )
+        }
     }
 
     override fun getItemCount(): Int {
@@ -56,7 +62,12 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
                 val charSearch = constraint.toString()
                 val filter = FilteringAlgorithm(charSearch)
                 val filterResults = FilterResults()
-                filterResults.values = filter.performFiltering(dataSet)
+                val toShow = filter.performFiltering(dataSet)
+                filterResults.values = if (showOnlyFavourites) {
+                    removeNotFavourites(toShow)
+                } else {
+                    toShow
+                }
                 return filterResults
             }
 
@@ -66,8 +77,7 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
                 val list = results?.values
                 if (list is List<*>) {
                     showedList = list as List<Record>
-                }
-                else {
+                } else {
                     Log.e("Casting error", list?.javaClass.toString())
                 }
                 notifyDataSetChanged()
@@ -77,6 +87,7 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
 
     fun switchFavouriteShow(shouldShowOnlyFavourites: Boolean, currentConstraint: String) {
         Log.d("Favourite", "Favourite toggled to: $shouldShowOnlyFavourites")
+        this.showOnlyFavourites = shouldShowOnlyFavourites
         showedList = if (shouldShowOnlyFavourites) {
             removeNotFavourites()
         } else {
@@ -85,7 +96,7 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
         notifyDataSetChanged()
     }
 
-    private fun removeNotFavourites() : List<Record> {
-        return showedList.filter { element -> element.isFavourite }
+    private fun removeNotFavourites(toRemove: List<Record> = showedList): List<Record> {
+        return toRemove.filter { element -> element.isFavourite }
     }
 }
