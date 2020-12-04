@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +24,6 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val rootView = inflater.inflate(R.layout.fragment_list, container, false)
         viewManager = LinearLayoutManager(context)
         viewAdapter = RecordAdapter(viewModel.records.value!!)
@@ -34,6 +34,18 @@ class ListFragment : Fragment() {
                 adapter = viewAdapter
             }
         }
+        val filter = rootView.findViewById<SearchView>(R.id.category_filter)
+        filter.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(viewAdapter))
         itemTouchHelper.attachToRecyclerView(recyclerView)
         return rootView

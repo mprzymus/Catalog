@@ -1,5 +1,6 @@
 package pl.mprzymus.catalog.main_list
 
+import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
@@ -15,6 +16,7 @@ class SwipeToDeleteCallback(private val adapter: RecordAdapter) :
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        TODO("Not yet implemented")
+        Log.d("onMove", "triggered")
+        return false
     }
 }
