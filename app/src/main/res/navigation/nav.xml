@@ -10,7 +10,7 @@
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action
-            android:id="@+id/action_listFragment_to_descriptionFragment"
+            android:id="@+id/toDescription"
             app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment
@@ -19,31 +19,20 @@
         android:label="fragment_description"
         tools:layout="@layout/fragment_description" >
         <action
-            android:id="@+id/action_descriptionFragment_to_listFragment"
-            app:destination="@id/listFragment" />
-        <action
-            android:id="@+id/action_descriptionFragment_to_galleryFragment"
+            android:id="@+id/toGallery"
             app:destination="@id/galleryFragment" />
         <action
-            android:id="@+id/action_descriptionFragment_to_detailsListFragmet"
+            android:id="@+id/toDetails"
             app:destination="@id/detailsListFragmet" />
     </fragment>
     <fragment
         android:id="@+id/galleryFragment"
         android:name="pl.mprzymus.catalog.record_details.GalleryFragment"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" >
-        <action
-            android:id="@+id/action_galleryFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_gallery" />
     <fragment
         android:id="@+id/detailsListFragmet"
         android:name="pl.mprzymus.catalog.record_details.DetailsListFragment"
         android:label="fragment_details_list"
-        tools:layout="@layout/fragment_details_list" >
-        <action
-            android:id="@+id/action_detailsListFragmet_to_descriptionFragment"
-            app:destination="@id/descriptionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_details_list" />
 </navigation>

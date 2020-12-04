@@ -1,9 +1,22 @@
 package pl.mprzymus.catalog.model
 
-class Record(val name: String, val imageId: Int, private val categories: MutableList<Category>, var isFavourite: Boolean = false) {
-    constructor(name: String, category: List<String>, imageId: Int, isFavourite: Boolean = false) : this(
+class Record(
+    val name: String,
+    val imageId: Int,
+    private val categories: MutableList<Category>,
+    val description: String,
+    var isFavourite: Boolean = false
+) {
+    constructor(
+        name: String,
+        category: List<String>,
+        imageId: Int,
+        description: String,
+        isFavourite: Boolean = false
+    ) : this(
         name, imageId,
         ArrayList(category.map { categoryName -> Category.getCategory(categoryName) }),
+        description,
         isFavourite
     )
 

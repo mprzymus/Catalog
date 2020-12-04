@@ -18,5 +18,6 @@ class RecordClickListener(private val viewModel: CatalogViewModel) {
 
     fun onRecordClick(record: Record) {
         Log.d("Click", "Record \'${record.name}\' was clicker")
+        viewModel.setToShow(record)
     }
 }

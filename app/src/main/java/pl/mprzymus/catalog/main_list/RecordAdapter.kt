@@ -23,7 +23,7 @@ class RecordAdapter(
     }
 
     private var showedList: List<Record>
-    private var showOnlyFavourites = true
+    private var showOnlyFavourites = false
 
     init {
         showedList = dataSet
@@ -70,11 +70,13 @@ class RecordAdapter(
                 val filter = FilteringAlgorithm(charSearch)
                 val filterResults = FilterResults()
                 val toShow = filter.performFiltering(dataSet)
-                filterResults.values = if (showOnlyFavourites) {
+                Log.d("Show", "$showOnlyFavourites")
+                showedList = if (showOnlyFavourites) {
                     removeNotFavourites(toShow)
                 } else {
                     toShow
                 }
+                filterResults.values = showedList
                 return filterResults
             }
 
