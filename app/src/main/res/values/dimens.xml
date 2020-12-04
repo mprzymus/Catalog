@@ -2,4 +2,5 @@
 <resources>
     <dimen name="margin">5dp</dimen>
     <dimen name="tittle_size">25sp</dimen>
+    <dimen name="normal_font">20sp</dimen>
 </resources>

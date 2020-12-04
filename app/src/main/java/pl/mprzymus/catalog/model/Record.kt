@@ -5,6 +5,7 @@ class Record(
     val imageId: Int,
     private val categories: MutableList<Category>,
     val description: String,
+    val links: List<String>,
     var isFavourite: Boolean = false
 ) {
     constructor(
@@ -12,11 +13,13 @@ class Record(
         category: List<String>,
         imageId: Int,
         description: String,
+        links: List<String>,
         isFavourite: Boolean = false
     ) : this(
         name, imageId,
         ArrayList(category.map { categoryName -> Category.getCategory(categoryName) }),
         description,
+        links,
         isFavourite
     )
 

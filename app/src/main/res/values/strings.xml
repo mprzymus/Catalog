@@ -7,4 +7,5 @@
     <string name="favourites_text">Show only favourites</string>
     <string name="galleryButton">Gallery</string>
     <string name="linksButton">Links</string>
+    <string name="details_tittle">Resources</string>
 </resources>
