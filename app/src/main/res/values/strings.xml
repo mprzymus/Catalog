@@ -5,4 +5,5 @@
     <string name="favourite">favourite</string>
     <string name="button_description">Like</string>
     <string name="graphic_description">Graphic of record</string>
+    <string name="favourites_text">Show only favourites</string>
 </resources>

@@ -7,17 +7,18 @@ import pl.mprzymus.catalog.main_list.Bootstrap
 import pl.mprzymus.catalog.model.Record
 
 class CatalogViewModel : ViewModel() {
-    fun switchLike(index: Int) {
-        val recordsList = _records.value
-        if (recordsList != null) {
-            recordsList[index].isFavourite = !recordsList[index].isFavourite
-            _records.value = _records.value
-        }
+    fun switchFavourites() {
+        val newValue: Boolean = !_favourites.value!!
+        _favourites.value = newValue
     }
 
     private val _records = MutableLiveData<MutableList<Record>>()
     val records: LiveData<MutableList<Record>>
         get() = _records
+
+    private val _favourites = MutableLiveData(false)
+    val favourites: LiveData<Boolean>
+        get() = _favourites
 
     init {
         val bootstrap = Bootstrap()
