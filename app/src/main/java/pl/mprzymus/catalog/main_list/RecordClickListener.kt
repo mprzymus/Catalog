@@ -5,10 +5,10 @@ import android.widget.ImageButton
 import pl.mprzymus.catalog.CatalogViewModel
 import pl.mprzymus.catalog.model.Record
 
-class RecordClickListener(private val viewModel: CatalogViewModel) {
+class RecordClickListener(private val viewModel: CatalogViewModel, private val callback: () -> Unit) {
 
     init {
-        Log.wtf("Lifecycle", "created recordClickListener")
+        Log.d("Lifecycle", "created recordClickListener")
     }
 
     fun onLikeClick(record: Record, button: ImageButton) {
@@ -19,5 +19,6 @@ class RecordClickListener(private val viewModel: CatalogViewModel) {
     fun onRecordClick(record: Record) {
         Log.d("Click", "Record \'${record.name}\' was clicker")
         viewModel.setToShow(record)
+        callback()
     }
 }

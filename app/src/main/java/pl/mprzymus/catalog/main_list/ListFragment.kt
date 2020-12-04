@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -16,9 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.mprzymus.catalog.CatalogViewModel
 import pl.mprzymus.catalog.R
+import pl.mprzymus.catalog.model.Record
 
 class ListFragment : Fragment() {
-    private lateinit var viewModel: CatalogViewModel
+    lateinit var viewModel: CatalogViewModel
     private lateinit var viewAdapter: RecordAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -34,8 +38,8 @@ class ListFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_list, container, false)
         viewManager = LinearLayoutManager(context)
         viewAdapter = RecordAdapter(
-            viewModel.records.value!!,
-            RecordClickListener(viewModel),
+            viewModel.records,
+            RecordClickListener(viewModel) { onRecordClick() },
             ColorProvider.getSecondaryColor(requireContext(), resources)
         )
         val act = activity
@@ -70,7 +74,6 @@ class ListFragment : Fragment() {
                     filter.query.toString()
                 )
             })
-        viewModel.toShow.observe(viewLifecycleOwner, {onRecordClick(rootView)})
         val favouritesButton = rootView.findViewById<CheckBox>(R.id.favourite)
         favouritesButton.setOnClickListener { viewModel.switchFavourites() }
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(viewAdapter))
@@ -78,10 +81,11 @@ class ListFragment : Fragment() {
         return rootView
     }
 
-    private fun onRecordClick(view: View) {
-        if (viewModel.toShow.value != null) {
-            Log.d("Click", "List fragment will show record details ${viewModel.toShow.value!!.name}")
-            Navigation.findNavController(view).navigate(R.id.toDescription)
-        }
+    private fun onRecordClick() {
+        Log.d(
+            "Click",
+            "List fragment will show record details ${viewModel.toShow.value!!.name}"
+        )
+        Navigation.findNavController(requireView()).navigate(R.id.toDescription)
     }
 }

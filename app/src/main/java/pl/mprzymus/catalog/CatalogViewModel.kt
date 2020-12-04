@@ -8,9 +8,7 @@ import pl.mprzymus.catalog.main_list.Bootstrap
 import pl.mprzymus.catalog.model.Record
 
 class CatalogViewModel : ViewModel() {
-    private val _records = MutableLiveData<MutableList<Record>>()
-    val records: LiveData<MutableList<Record>>
-        get() = _records
+    val records = Bootstrap().initializeData()
 
     private val _favourites = MutableLiveData(false)
     val favourites: LiveData<Boolean>
@@ -22,8 +20,6 @@ class CatalogViewModel : ViewModel() {
 
     init {
         Log.d("View model", "Catalog view model created")
-        val bootstrap = Bootstrap()
-        _records.value = bootstrap.initializeData()
     }
 
     fun setToShow(newValue: Record) {
@@ -34,9 +30,5 @@ class CatalogViewModel : ViewModel() {
     fun switchFavourites() {
         val newValue: Boolean = !_favourites.value!!
         _favourites.value = newValue
-    }
-
-    fun resetToShow() {
-        _toShow.value = null
     }
 }
