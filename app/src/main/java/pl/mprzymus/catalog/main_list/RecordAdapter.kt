@@ -9,7 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.mprzymus.catalog.R
 import pl.mprzymus.catalog.model.Record
 
-class RecordAdapter(private val dataSet: MutableList<Record>) :
+class RecordAdapter(
+    private val dataSet: MutableList<Record>,
+    private val clickListener: RecordClickListener,
+    private val secondaryColor: Int
+) :
     RecyclerView.Adapter<RecordAdapter.RecordViewHolder>(), Filterable {
     class RecordViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val tittle: TextView = itemView.findViewById(R.id.itemName)
@@ -18,7 +22,6 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
         val button: ImageButton = itemView.findViewById(R.id.button)
     }
 
-    private val clickListener: RecordClickListener = RecordClickListener()
     private var showedList: List<Record>
     private var showOnlyFavourites = true
 
@@ -35,6 +38,7 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
     }
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
+        holder.itemView.setOnClickListener { clickListener.onRecordClick(showedList[position]) }
         holder.tittle.text = showedList[position].name
         holder.image.setImageResource(showedList[position].imageId)
         holder.category.text = showedList[position].getCategories()
@@ -44,6 +48,9 @@ class RecordAdapter(private val dataSet: MutableList<Record>) :
                 showedList[position],
                 holder.button
             )
+        }
+        if (position % 2 == 0) {
+            holder.itemView.setBackgroundColor(secondaryColor)
         }
     }
 
