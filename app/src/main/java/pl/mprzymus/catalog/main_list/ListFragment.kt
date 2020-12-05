@@ -32,8 +32,6 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        Log.wtf("NAv", "Was he right?")
         viewModel = ViewModelProvider(requireActivity()).get(CatalogViewModel::class.java)
         val rootView = inflater.inflate(R.layout.fragment_list, container, false)
         viewManager = LinearLayoutManager(context)
